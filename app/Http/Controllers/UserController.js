@@ -11,7 +11,7 @@ class UserController {
 			let user = yield User.create(data)
 			response.status(201).json(user)
 		} catch(e){
-			response.status(400).send("Invalid Request")
+			response.status(400).send(e.message)
 		}
 
 	}
