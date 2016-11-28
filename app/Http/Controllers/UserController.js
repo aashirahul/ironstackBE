@@ -18,9 +18,11 @@ class UserController {
 
 	*login(request,response){
 		let data = request.only('userName','password')
+		let user = yield User.findBy('userName',data.userName)
 		try{
 			const token = yield request.auth.attempt(data.userName,data.password)
-			response.status(200).send(token)
+			user.access_token = token
+			response.status(200).send(user)
 		} catch(e){
 			response.status(401).unauthorized({error: e.message})
 		}
