@@ -1,14 +1,30 @@
 'use strict'
 const User = use("App/Model/User")
+const Hash = use('Hash')
 
 class UserController {
 
-	*signUp{
+	*signUp(request,response){
+		let data = request.all()
+		data.password = yield Hash.make(data.password)
+		try {
+			let user = yield User.create(data)
+			response.status(201).json(user)
+		} catch(e){
+			response.status(400).send("Invalid Request")
+		}
 
 	}
 
-	*login{
-		
+	*login(request,response){
+		let data = request.only('userName','password')
+		try{
+			const token yield request.auth.attempt(data.userName,data.password)
+			response.status(200).send(token)
+		} catch(e){
+			response.status(401).unauthorized({error: e.message})
+		}
+
 	}
 
 
