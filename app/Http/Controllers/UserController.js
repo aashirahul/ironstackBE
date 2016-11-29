@@ -1,11 +1,11 @@
 'use strict'
 const User = use("App/Model/User")
-const Admin = use("App/Model/Admin")
+// const Admin = use("App/Model/Admin")
 const Hash = use('Hash')
 
 class UserController {
 
-	*signUp(request,response){
+	* signUp(request,response){
 		let data = request.all()
 		data.password = yield Hash.make(data.password)
 		try {
@@ -17,7 +17,7 @@ class UserController {
 
 	}
 
-	*login(request,response){
+	* login(request,response){
 		let data = request.only('userName','password')
 		let user = yield User.findBy('userName',data.userName)
 		try{

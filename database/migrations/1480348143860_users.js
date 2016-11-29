@@ -14,7 +14,6 @@ class UsersTableSchema extends Schema {
       table.string('userName').unique()
       table.string('password')
       table.boolean('admin').defaultTo(false)
-
     })
   }
 
