@@ -13,6 +13,7 @@ class UsersTableSchema extends Schema {
       table.string('email').unique()
       table.string('userName').unique()
       table.string('password')
+      table.boolean('admin').defaultTo(false)
 
     })
   }

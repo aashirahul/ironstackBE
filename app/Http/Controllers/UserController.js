@@ -1,5 +1,6 @@
 'use strict'
 const User = use("App/Model/User")
+const Admin = use("App/Model/Admin")
 const Hash = use('Hash')
 
 class UserController {
